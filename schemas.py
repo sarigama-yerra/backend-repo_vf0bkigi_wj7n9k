@@ -38,11 +38,20 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
+# Laundry SaaS Schemas
 
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+class Customer(BaseModel):
+    """Customers collection schema"""
+    name: str = Field(..., description="Customer full name")
+    phone: str = Field(..., description="Phone number")
+    address: Optional[str] = Field(None, description="Address")
+
+class Order(BaseModel):
+    """Orders collection schema"""
+    customer_name: str = Field(..., description="Name of the customer")
+    phone: str = Field(..., description="Customer phone number")
+    address: Optional[str] = Field(None, description="Pickup/Delivery address")
+    service_type: str = Field(..., description="Service type e.g., Wash & Fold, Dry Clean")
+    weight_kg: float = Field(0.0, ge=0, description="Estimated weight in KG")
+    price: Optional[float] = Field(None, ge=0, description="Calculated price in local currency")
+    status: str = Field("received", description="Order status: received, washing, drying, ready, delivered")

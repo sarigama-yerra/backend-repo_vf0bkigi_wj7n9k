@@ -1,0 +1,1 @@
+Backend endpoints will be kept minimal for now since database viewer handles CRUD based on schemas.py. If needed, we can extend with business-specific endpoints such as pricing calculator, schedule optimizer, or webhook handlers.
